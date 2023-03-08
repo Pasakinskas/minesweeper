@@ -1,31 +1,21 @@
 package lt.pasakinskas.minesweeper;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.Scanner;
 
 public class MinesweeperApplication {
 
+	private final static int GAME_BOARD_HEIGHT = 5;
+	private final static int GAME_BOARD_WIDTH = 5;
+	private final static int NUMBER_OF_BOMBS = 5;
+
 	public static void main(String[] args) {
-		var game = new Game();
-		game.getState();
+		var scanner = new Scanner(System.in);
+		var board = new Board(GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, NUMBER_OF_BOMBS);
+		var display = new Display(board);
+		var controls = new Controls(scanner);
 
-		var lives = 1;
+		var game = new Game(board, display, controls);
 
-		Scanner scanner = new Scanner(System.in);
-
-		while (lives >= 1) {
-			System.out.println();
-			game.getState();
-			System.out.println("spekite kur bomba");
-			var guess = scanner.nextLine();
-			var guessCoordinates = guess.split(",");
-			var x = Integer.valueOf(guessCoordinates[0]);
-			var y = Integer.valueOf(guessCoordinates[1]);
-
-			game.guess(x, y);
-		}
+		game.init();
 	}
-
 }
