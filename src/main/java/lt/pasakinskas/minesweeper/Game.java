@@ -19,8 +19,6 @@ public class Game {
 
     var userInput = controls.getInput();
     guess(userInput.getX(), userInput.getY());
-
-    display.showBoardState();
   }
 
   public void init() {

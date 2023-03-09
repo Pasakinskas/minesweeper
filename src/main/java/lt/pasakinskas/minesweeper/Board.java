@@ -36,8 +36,9 @@ public class Board {
 
   public void placeBombs(int boardHeight, int boardWidth, int numberOfBombs) {
     var placedBombs = 0;
+    var tries = 0;
 
-    while (placedBombs < numberOfBombs) {
+    while (placedBombs < numberOfBombs || tries > numberOfBombs + 10) {
       var randomHeight = (int) Math.floor(Math.random() * boardHeight);
       var randomWidth = (int) Math.floor(Math.random() * boardWidth);
 
@@ -47,6 +48,7 @@ public class Board {
         placeBomb(randomWidth, randomHeight);
         placedBombs++;
       }
+      tries++;
     }
   }
 
